@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/tests/"/>
+  <Folder Name="/src/">
+    <Project Path="src/EshopMicroservices.API/EshopMicroservices.API.csproj"/>
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/BuildingBlocks/BuildingBlocks.csproj"/>
+  </Folder>
+</Solution>
