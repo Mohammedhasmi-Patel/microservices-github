@@ -1,11 +1,9 @@
-﻿using BuildingBlocks.CQRS;
-using EshopMicroservices.API.Models;
-namespace EshopMicroservices.API.Products.CreateProduct;
+﻿namespace EshopMicroservices.API.Products.CreateProduct;
 
 public record CreateProductCommand(string Name, List<string> Categories, string Description, string ImageFile, decimal Price) : ICommand<CreateproductResult>;
 
 public record CreateproductResult(Guid Id);
-internal class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, CreateproductResult>
+internal class CreateProductCommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateproductResult>
 {
     public async Task<CreateproductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
@@ -19,7 +17,9 @@ internal class CreateProductCommandHandler : ICommandHandler<CreateProductComman
             Price = command.Price
         };
         // save to the database 
+        session.Store(product);
+        await session.SaveChangesAsync(cancellationToken);
         // return the result
-        return new CreateproductResult(Guid.NewGuid());
+        return new CreateproductResult(product.Id);
     }
 }

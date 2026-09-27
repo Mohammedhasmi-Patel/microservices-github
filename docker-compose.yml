@@ -1,0 +1,24 @@
+services:
+  eshopmicroservices.api:
+    image: ${DOCKER_REGISTRY-}eshopmicroservicesapi
+    build:
+      context: .
+      dockerfile: src/EshopMicroservices.API/Dockerfile
+    depends_on:
+      - catalogdb
+
+  catalogdb:
+    container_name: catalogdb
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=CatalogDb
+    restart: always
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_catalog:/var/lib/postgresql/data
+
+volumes:
+  postgres_catalog:
