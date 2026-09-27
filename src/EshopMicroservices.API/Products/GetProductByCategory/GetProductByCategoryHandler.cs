@@ -1,5 +1,4 @@
-﻿using Marten.Linq.QueryHandlers;
-
+﻿
 namespace EshopMicroservices.API.Products.GetProductByCategory;
 
 public record GetProductByCategoryQuery(string Category) : IQuery<GetProductByCategoryResult>;

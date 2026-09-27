@@ -1,6 +1,5 @@
 namespace EshopMicroservices.API.Products.GetProductById;
 
-
 public record GetProductByIdResponse(Product Product);
 
 public class GetProductByIdEndPoint : ICarterModule
